@@ -3,7 +3,7 @@ import { ProdutoModel } from "./../models/produtoModel";
 
 const produtoModel = new ProdutoModel();
 
-export const getprodutos = async (req: Request, res: Response) => {
+export const getProdutos = async (req: Request, res: Response) => {
     try {
         const produtos = await produtoModel.getAll();
         res.json(produtos);
@@ -43,3 +43,13 @@ export const deleteProduto = async (req: Request, res: Response) => {
         res.status(500).json({message: 'Erro ao excluir produto.', error});
     }
 };
+
+export const getProduto = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const produto = await produtoModel.get(Number(id));
+        res.json(produto);
+    } catch (error) {
+        res.status(500).json({message: 'Erro ao buscar produto.', error});
+    }
+}

@@ -12,6 +12,11 @@ export class ProdutoModel{
         return rows as Produto[];
     };
 
+    async get(id: number): Promise<Produto[]> {
+        const [ row ] = await pool.query('SELECT * FROM produtos WHERE id = ?', [id]); 
+        return row as Produto[];
+    }
+
     async create( produto: Produto ): Promise<void> {
         await pool.query('INSERT INTO produtos (nome, preco) VALUES (?, ?)', [produto.nome, produto.preco])
     };
