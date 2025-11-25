@@ -33,3 +33,13 @@ export const updateProduto = async (req: Request, res: Response) => {
         res.status(500).json({message: 'Erro ao atualizar produto.', error});
     }
 };
+
+export const deleteProduto = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        await produtoModel.delete(Number(id));
+        res.json({message: 'Produto excluído com sucesso!'})
+    } catch (error) {
+        res.status(500).json({message: 'Erro ao excluir produto.', error});
+    }
+};

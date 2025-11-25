@@ -20,6 +20,8 @@ export class ProdutoModel{
         await pool.query('UPDATE produtos SET nome = ?, preco = ? WHERE id = ?', [produto.nome, produto.preco, id]);
     };
 
-    
+    async delete(id: number): Promise<void> {
+        await pool.query('DELETE FROM produtos WHERE id = ?', [id]);
+    }
 };
 
