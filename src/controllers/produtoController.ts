@@ -22,3 +22,14 @@ export const createProduto = async (req: Request, res: Response) => {
         res.status(500).json({message: 'Erro ao criar produto.', error});
     }
 };
+
+export const updateProduto = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { nome, preco} = req.body;
+        await produtoModel.update(Number(id), {nome, preco});
+        res.json({message: 'Produto atualizado com sucesso!'});
+    } catch (error) {
+        res.status(500).json({message: 'Erro ao atualizar produto.', error});
+    }
+};
